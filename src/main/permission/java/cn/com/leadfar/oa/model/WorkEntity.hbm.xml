@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="cn.com.leadfar.oa.model.WorkEntity" table="t_workentity">
+		<id name="id">
+			<generator class="native"/>
+		</id>
+		<property name="createTime" update="false"/>
+		<property name="processDefinitionId"/>
+		<property name="status"/>
+		<many-to-one name="creator" update="false"/>
+		<map name="props" cascade="all-delete-orphan" inverse="false">
+			<key column="workEntityId"/>
+			<map-key type="string" column="propertyName"/>
+			<one-to-many class="cn.com.leadfar.oa.model.EntityProperty"/>
+		</map>
+		<set name="workApproves" lazy="extra" inverse="true" order-by="approveTime desc">
+			<key column="workEntity"/>
+			<one-to-many class="cn.com.leadfar.oa.model.WorkApprove"/>
+		</set>
+	</class>
+</hibernate-mapping>

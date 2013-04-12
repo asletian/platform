@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="cn.com.leadfar.oa.model.WorkApprove" table="t_workapprove">
+		<id name="id">
+			<generator class="native"/>
+		</id>
+		<property name="approveTime"/>
+		<property name="taskId"/>
+		<property name="formKey"/>
+		<many-to-one name="approver"/>
+		<many-to-one name="workEntity"/>
+		<map name="props" cascade="all-delete-orphan" inverse="false">
+			<key column="workApproveId"/>
+			<map-key type="string" column="propertyName"/>
+			<one-to-many class="cn.com.leadfar.oa.model.EntityProperty"/>
+		</map>
+	</class>
+</hibernate-mapping>
