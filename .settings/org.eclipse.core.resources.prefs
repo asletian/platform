@@ -1,9 +1,0 @@
-eclipse.preferences.version=1
-encoding//src/main/permission/java/cn/com/leadfar/oa=UTF-8
-encoding//src/main/resources/application.properties=UTF-8
-encoding//src/main/resources/hibernate.properties=UTF-8
-encoding//src/main/webapp/WEB-INF/views/common/default.jsp=UTF-8
-encoding//src/main/webapp/WEB-INF/views/common/header.jsp=UTF-8
-encoding//src/main/webapp/WEB-INF/views/common/menu.jsp=UTF-8
-encoding//src/main/webapp/WEB-INF/views/common/taglib.jsp=UTF-8
-encoding//src/main/webapp/index.jsp=UTF-8
