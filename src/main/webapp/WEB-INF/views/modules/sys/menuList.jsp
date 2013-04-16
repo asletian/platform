@@ -1,6 +1,11 @@
-<%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="/WEB-INF/views/common/taglib.jsp"%>
+<html>
+<head>
 	<title>菜单管理</title>
+	<%@include file="/WEB-INF/views/common/include.jsp"%>
+	<link href="${ctxStatic}/jquery/jquery-treeTable/themes/vsStyle/treeTable.css" rel="stylesheet" type="text/css" />
+	<script src="${ctxStatic}/jquery/jquery-treeTable/jquery.treeTable.js" type="text/javascript"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$("#treeTable").treeTable({expandLevel : 5});
@@ -12,6 +17,8 @@
 	    	return false;
 	    }
 	</script>
+</head>
+<body>
 	<ul class="nav nav-tabs">
 		<li class="active"><a href="${ctx}/sys/menu/">菜单列表</a></li>
 		<li><a href="${ctx}/sys/menu/form">菜单添加</a></li>
@@ -33,3 +40,6 @@
 			</tr>
 		</c:forEach>
 	</table>
+</body>
+</html>
+

@@ -49,4 +49,8 @@ public class MenuService extends BaseService<Menu> {
 		Menu parent = menuDao.findRoot();
 		return searchByParent(parent.getId());
 	}
+	
+	public List<Menu> searchAllExcludeRoot(){
+		return menuDao.findAllExcludeRoot();
+	}
 }

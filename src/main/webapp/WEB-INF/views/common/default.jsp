@@ -1,22 +1,54 @@
+<%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ include file="/WEB-INF/views/common/taglib.jsp"%>
 <html>
 <head>
 <title>${fns:getConfig('productName')}</title>
 <%@include file="/WEB-INF/views/common/include.jsp"%>
+<style type="text/css">
+	.nav li{margin-top:8px;}.nav li.title{margin-top:0;}.nav li.menu,.nav li.dropdown{margin:8px 3px 0 3px}
+	.nav li.menu a{padding:5px 6px;*padding:4px 5px 3px 5px;}.nav li.dropdown a{padding:5px 6px;*padding:1px 5px 3px 5px;}
+	.nav li a{font-size:14px;padding:6px 8px;*padding:3px 8px;}
+</style>
+<script type="text/javascript"> 
+	$(document).ready(function() {
+		$("#menu a.menu").click(function(){
+			$("#menu li.menu").removeClass("active");
+			$(this).parent().addClass("active");
+		});
+	});
+</script>
 </head>
 <body>
 	<div id="main" class="container-fluid">
-		<tiles:insertAttribute name="header" ignore="true" />
+	    <div id="header" class="row-fluid">
+			<div id="title">
+				<span class="pull-right">您好, 
+			    	<a target="mainFrame">Crazy/Y</a> | <a href="${ctx}/logout">退出</a> | <a >访问网站</a>
+					&nbsp;&nbsp;&nbsp;
+				</span>
+		    	<ul class="nav nav-pills" style="margin:0;" id="menu">
+		    	  <li class="title"><h1>${fns:getConfig('productName')}<small></small></h1></li>
+				  <li style="width:18px;">&nbsp;</li>
+				  <c:set var="firstMenu" value="true"/><c:forEach items="${fns:getMenuList()}" var="menu" varStatus="idxStatus"><c:if test="${menu.parent.id eq 1}">
+					<li class="menu ${firstMenu?' active':''}"><a class="menu" href="${ctx}/sys/menu/tree?parentId=${menu.id}" target="menuFrame" >${menu.name}</a></li>
+				  <c:if test="${firstMenu}"><c:set var="firstMenuId" value="${menu.id}"/></c:if><c:set var="firstMenu" value="false"/></c:if></c:forEach>
+				</ul>
+			</div>
+		</div>
 		<div id="content" class="row-fluid">
 			<div id="left">
-				<tiles:insertAttribute name="menu" ignore="true" />
+				<iframe id="menuFrame" name="menuFrame" src="${ctx}/sys/menu/tree?parentId=${firstMenuId}" style="overflow:visible;"
+					scrolling="yes" frameborder="no" width="100%" height="650"></iframe>
 			</div>
 			<div id="openClose" class="close">&nbsp;</div>
 			<div id="right">
-				<tiles:insertAttribute name="body" ignore="true" />
+				<iframe id="mainFrame" name="mainFrame" style="overflow:visible;"
+					scrolling="yes" frameborder="no" width="100%" height="650"></iframe>
 			</div>
 		</div>
-		<tiles:insertAttribute name="footer" ignore="true" />
+	    <div id="footer" class="row-fluid">
+            Copyright &copy; 2012-${fns:getConfig('copyrightYear')} <a href="http://thinkgem.iteye.com" target="_blank">ThinkGem</a> - Powered By <a href="https://github.com/thinkgem/jeesite" target="_blank">JeeSite</a> ${fns:getConfig('version')}
+		</div>
 	</div>
 	<script type="text/javascript"> 
 		var lw = "14.89%", rw = "82.97%"; // 左侧窗口展开大小
@@ -38,49 +70,7 @@
 				$("html").css("overflow-x","hidden");
 			}
 		}
-		
-		$("#left").width(lw);$("#right").width(rw);
-		$("#openClose").click(function(){
-			if($(this).hasClass("close")){
-				$(this).removeClass("close");
-				$(this).addClass("open");
-				$("#left").animate({width:lwClose,opacity:"hide"});
-				$("#right").animate({width:rwClose});
-			}else{
-				$(this).addClass("close");
-				$(this).removeClass("open");
-				$("#left").animate({width:lw,opacity:"show"});
-				$("#right").animate({width:rw});
-			}
-		});
-		if(!Array.prototype.map)
-			Array.prototype.map = function(fn,scope) {
-			var result = [],ri = 0;
-			for (var i = 0,n = this.length; i < n; i++){
-			  if(i in this){
-			    result[ri++]  = fn.call(scope ,this[i],i,this);
-			  }
-			}
-			return result;
-		};
-		var getWindowSize = function(){
-			return ["Height","Width"].map(function(name){
-			  return window["inner"+name] ||
-				document.compatMode === "CSS1Compat" && document.documentElement[ "client" + name ] || document.body[ "client" + name ];
-			});
-		};
-		window.onload = function (){
-			if(!+"\v1" && !document.querySelector) { // for IE6 IE7
-			  document.body.onresize = resize;
-			} else { 
-			  window.onresize = resize;
-			}
-			function resize() {
-				wSize();
-				return false;
-			}
-		};
-		wSize(); // 在主窗体中定义，设置调整目标
 	</script>
+	<script src="${ctxStatic}/wsize.js" type="text/javascript"></script>
 </body>
 </html>

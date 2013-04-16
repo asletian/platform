@@ -380,6 +380,18 @@
 					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
+			<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<configuration>
+					<outputDirectory>src/main/webapp/WEB-INF/lib</outputDirectory>
+					<overWriteReleases>false</overWriteReleases>
+					<overWriteSnapshots>false</overWriteSnapshots>
+					<overWriteIfNewer>true</overWriteIfNewer>
+					<excludeScope>provided</excludeScope>
+					<excludeArtifactIds>testng</excludeArtifactIds>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 </project>

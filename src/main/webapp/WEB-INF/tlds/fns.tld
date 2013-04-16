@@ -11,7 +11,14 @@
   <short-name>fns</short-name>
   <uri>http://java.sun.com/jsp/jstl/functionss</uri>
 
-  <!-- SYS -->
+  <!-- Menu -->
+  <function>
+    <description>获取当前用户的菜单对象列表</description>
+    <name>getMenuList</name>
+    <function-class>com.crazy.pss.sys.utils.SysUtils</function-class>
+    <function-signature>java.util.List getMenuList()</function-signature>
+    <example>${fns:getMenuList()}</example>  
+  </function>
   <function>
     <description>获取当前用户的菜单对象列表</description>
     <name>getTopMenus</name>
@@ -25,6 +32,15 @@
     <function-class>com.crazy.pss.sys.utils.SysUtils</function-class>
     <function-signature>java.util.List getMenusByParent(java.lang.String)</function-signature>
     <example>${fns:getMenuByParent(parentId)}</example>  
+  </function>
+  
+    <!-- Dictionary -->
+  <function>
+    <description>获取字典对象列表</description>
+    <name>getDictList</name>
+    <function-class>com.crazy.pss.sys.utils.SysUtils</function-class>
+    <function-signature>java.util.List getDictList(java.lang.String)</function-signature>
+    <example>${fns:getDictList(type)}</example>  
   </function>
   
   <!-- SYS -->

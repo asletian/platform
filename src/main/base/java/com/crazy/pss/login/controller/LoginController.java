@@ -22,6 +22,6 @@ public class LoginController extends BaseController{
 	
 	@RequestMapping("login")
 	public String login(){
-		return "default";
+		return "common/default";
 	}
 }

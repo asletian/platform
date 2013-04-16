@@ -7,6 +7,7 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
+import com.crazy.pss.sys.model.Dictionary;
 import com.crazy.pss.sys.model.Menu;
 import com.crazy.pss.sys.service.DictionaryService;
 import com.crazy.pss.sys.service.MenuService;
@@ -18,6 +19,10 @@ public class SysUtils implements ApplicationContextAware{
 	private static MenuService menuService;
 	private static DictionaryService dictService;
 	
+	public static List<Menu> getMenuList(){
+		return menuService.searchAll();
+	}
+	
 	public static List<Menu> getMenusByTarget(String target){
 		return menuService.searchByTarget(target);
 	}
@@ -28,6 +33,10 @@ public class SysUtils implements ApplicationContextAware{
 	
 	public static List<Menu> getTopMenus(){
 		return menuService.searchTop();
+	}
+	
+	public static List<Dictionary> getDictList(String type){
+		return dictService.searchBy("type", type);
 	}
 	
 	@Override

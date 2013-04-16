@@ -14,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.crazy.pss.common.persistence.ICustomRepository;
 import com.crazy.pss.common.utils.Reflections;
-import com.crazy.pss.sys.model.Menu;
 
 /**
  * 
@@ -40,6 +39,10 @@ public abstract class BaseService<T> {
 		return getDao().findAll();
 	}
 	
+	public void delete(T t){
+		getDao().delete(t);
+	}
+	
 	public T searchUnique(final String name, final String value) { 
 		T t = getDao().findOne(new Specification<T> (){
 			
@@ -52,6 +55,21 @@ public abstract class BaseService<T> {
 			}
 		});
 		return t;
+	}
+	
+	public List<T> searchBy(final String name, final String value) {
+		List<T> ts = getDao().findAll(new Specification<T> (){
+
+			@Override
+			public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query,
+					CriteriaBuilder cb) {
+				root = (Root<T>) query.from(getEntityClass());
+				Path<String> pname = root.get(name);
+				return cb.equal(pname, value);
+			}
+			
+		});
+		return ts;
 	}
 	
 	private Class<T> getEntityClass(){

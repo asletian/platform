@@ -49,19 +49,41 @@ public class MenuController extends BaseController{
 //		return "modules/sys/menuList";
 //	}
 	
+	@RequestMapping(value = "form")
+	public String form(Menu menu, Model model){
+		if (menu.getParent()==null||menu.getParent().getId()==null){
+			menu.setParent(new Menu());
+		} else {
+			menu.setParent(menuService.get(menu.getParent().getId()));
+		}
+		model.addAttribute("menu", menu);
+		return "modules/sys/menuForm";
+	}
+	
+	@RequestMapping(value = "delete")
+	public String delete(Menu menu, Model model){
+		menuService.delete(menu);
+		return list(model);
+	}
+	
 	@RequestMapping(value = "tree")
 	public String tree(Model model, 
 			@RequestParam(value = "parentId", required = true)String parentId){
 		List<Menu> menus = menuService.searchByParent(parentId);
 		model.addAttribute("menus", menus);
-		return "sys.menu";
+		return "modules/sys/menuTree";
 	}
 	
 	@RequestMapping(value = "list")
-	public String List(Model model){
-		List<Menu> menus = menuService.searchAll();
+	public String list(Model model){
+		List<Menu> menus = menuService.searchAllExcludeRoot();
 		model.addAttribute("list", menus);
 		return "modules/sys/menuList";
 	}
 	
+	@RequestMapping(value = "save")
+	public String save(Menu menu, Model model){
+		menuService.save(menu);
+		return list(model);
+	}
 }

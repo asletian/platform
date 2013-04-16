@@ -29,8 +29,12 @@ public interface MenuDao extends ICustomRepository<Menu, Serializable>{
 	@Query("from Menu m where m.isShow = '" + Constants.SHOW + "'")
 	public List<Menu> findAll();
 	
+	@Query("from Menu m where m.parent != null")
+	public List<Menu> findAllExcludeRoot();
+	
 	@Query("from Menu m where m.parent = null")
 	public Menu findRoot();
+	
 }
 
 /**
