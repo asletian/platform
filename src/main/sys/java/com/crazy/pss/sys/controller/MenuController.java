@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.crazy.pss.common.utils.Constants;
 import com.crazy.pss.common.web.BaseController;
@@ -39,18 +40,8 @@ public class MenuController extends BaseController{
 		}
 	}
 	
-//	@RequestMapping(value = "list")
-//	public String list(Menu menu, Model model, 
-//			@RequestParam(value = "pageNo", required = true) Integer pageNo,
-//			@RequestParam(value = "size", required = true) Integer size){
-//		
-//		List<Menu> menus = menuService.search(menu, pageNo, size);
-//		model.addAttribute("menus", menus);
-//		return "modules/sys/menuList";
-//	}
-	
 	@RequestMapping(value = "form")
-	public String form(Menu menu, Model model){
+	public String form(Model model, Menu menu){
 		if (menu.getParent()==null||menu.getParent().getId()==null){
 			menu.setParent(new Menu());
 		} else {
@@ -60,14 +51,25 @@ public class MenuController extends BaseController{
 		return "modules/sys/menuForm";
 	}
 	
+	@RequestMapping(value = "save")
+	public String save(Model model, Menu menu){
+		if(!beanValidator(model, menu)) {
+			return form(model, menu);
+		}
+		menuService.save(menu);
+		addMessage(model, "保存菜单" + menu.getName() + "成功");
+		return list(model);
+	}
+	
 	@RequestMapping(value = "delete")
-	public String delete(Menu menu, Model model){
+	public String delete(Model model, Menu menu, RedirectAttributes redirectAttributes){
 		menuService.delete(menu);
+		addMessage(redirectAttributes, "删除菜单" + menu.getName() + "成功");
 		return list(model);
 	}
 	
 	@RequestMapping(value = "tree")
-	public String tree(Model model, 
+	public String tree(Model model,
 			@RequestParam(value = "parentId", required = true)String parentId){
 		List<Menu> menus = menuService.searchByParent(parentId);
 		model.addAttribute("menus", menus);
@@ -81,9 +83,4 @@ public class MenuController extends BaseController{
 		return "modules/sys/menuList";
 	}
 	
-	@RequestMapping(value = "save")
-	public String save(Menu menu, Model model){
-		menuService.save(menu);
-		return list(model);
-	}
 }
