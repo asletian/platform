@@ -1,5 +1,7 @@
 package com.crazy.pss.uc.service;
 
+import java.io.Serializable;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,7 +19,7 @@ public class PartyTypeService extends BaseService<PartyType> {
 	private PartyTypeDao partyTypeDao;
 
 	@Override
-	protected ICustomRepository getDao() {
+	protected ICustomRepository<PartyType, Serializable> getDao() {
 		return partyTypeDao;
 	}
 	

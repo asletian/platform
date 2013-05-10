@@ -1,5 +1,6 @@
 package com.crazy.pss.sys.service;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -35,7 +36,7 @@ public class DictionaryService extends BaseService<Dictionary> {
 	private DictionaryDao dictionaryDao;
 
 	@Override
-	protected ICustomRepository getDao() {
+	protected ICustomRepository<Dictionary, Serializable> getDao() {
 		return dictionaryDao;
 	}
 

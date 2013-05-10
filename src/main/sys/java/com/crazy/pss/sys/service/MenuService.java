@@ -1,15 +1,9 @@
 package com.crazy.pss.sys.service;
 
+import java.io.Serializable;
 import java.util.List;
 
-import javax.annotation.Resource;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,7 +27,7 @@ public class MenuService extends BaseService<Menu> {
 	private MenuDao menuDao;
 
 	@Override
-	protected ICustomRepository getDao() {
+	protected ICustomRepository<Menu, Serializable> getDao() {
 		return menuDao;
 	}
 
