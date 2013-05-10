@@ -1,6 +1,7 @@
 package com.crazy.pss.common.service;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -9,9 +10,16 @@ import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.crazy.pss.common.config.GlobalConfiguration;
+import com.crazy.pss.common.persistence.DynamicSpecifications;
+import com.crazy.pss.common.persistence.FilterGroup;
+import com.crazy.pss.common.persistence.FilterRule;
 import com.crazy.pss.common.persistence.ICustomRepository;
 import com.crazy.pss.common.utils.Reflections;
 
@@ -43,13 +51,16 @@ public abstract class BaseService<T> {
 		getDao().delete(t);
 	}
 	
+	public void delete(String id) {
+		getDao().delete(id);
+	}
+	
 	public T searchUnique(final String name, final String value) { 
 		T t = getDao().findOne(new Specification<T> (){
 			
 			@Override
 			public Predicate toPredicate(Root<T> root,
 					CriteriaQuery<?> query, CriteriaBuilder cb) {
-				root = (Root<T>) query.from(getEntityClass());
 				Path<String> pname = root.get(name);
 				return cb.equal(pname, value);
 			}
@@ -63,7 +74,6 @@ public abstract class BaseService<T> {
 			@Override
 			public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query,
 					CriteriaBuilder cb) {
-				root = (Root<T>) query.from(getEntityClass());
 				Path<String> pname = root.get(name);
 				return cb.equal(pname, value);
 			}
@@ -72,7 +82,39 @@ public abstract class BaseService<T> {
 		return ts;
 	}
 	
+	public Page<T> searchPage(Collection<FilterRule> rules, Integer pageNo, Integer pageSize, Sort sort) {
+		if(pageNo == null) pageNo = GlobalConfiguration.getInteger("pageNo", 0);
+		if(pageSize == null) pageSize = GlobalConfiguration.getInteger("pageSize", 10);
+		if(sort == null) {
+			if(hasAttribute("createTime")) {
+				sort = new Sort("createTime");
+			}
+		}
+		
+		return getDao().findAll(
+				DynamicSpecifications.bySearchRule(rules, getEntityClass()),
+				new PageRequest(pageNo, pageSize, sort));
+	}
+	
+	public Page<T> searchPage(FilterGroup group, Integer pageNo, Integer pageSize, Sort sort) {
+		if(pageNo == null) pageNo = GlobalConfiguration.getInteger("pageNo", 0);
+		if(pageSize == null) pageSize = GlobalConfiguration.getInteger("pageSize", 10);
+		if(sort == null) {
+			if(hasAttribute("createTime")) {
+				sort = new Sort("createTime");
+			}
+		}
+		
+		return getDao().findAll(
+				DynamicSpecifications.bySearchGroup(group, getEntityClass()),
+				new PageRequest(pageNo, pageSize, sort));
+	}
+	
 	private Class<T> getEntityClass(){
 		return Reflections.getClassGenricType(getClass());
+	}
+	
+	private boolean hasAttribute(String attrName) {
+		return Reflections.hasAttribute(attrName, getEntityClass());
 	}
 }

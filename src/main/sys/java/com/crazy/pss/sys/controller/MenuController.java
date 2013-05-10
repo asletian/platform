@@ -74,7 +74,7 @@ public class MenuController extends BaseController{
 		return "modules/sys/menuTree";
 	}
 	
-	@RequestMapping(value = "list")
+	@RequestMapping(value = {"list", ""})
 	public String list(Model model){
 		List<Menu> menus = menuService.searchAllExcludeRoot();
 		model.addAttribute("list", menus);

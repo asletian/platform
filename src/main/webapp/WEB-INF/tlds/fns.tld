@@ -48,7 +48,7 @@
     <description>获取资源文件值</description>
     <name>getConfig</name>
     <function-class>com.crazy.pss.common.config.GlobalConfiguration</function-class>
-    <function-signature>java.util.List getConfig(java.lang.String)</function-signature>
+    <function-signature>java.util.List getString(java.lang.String)</function-signature>
     <example>${fns:getConfig(key)}</example>  
   </function>
   

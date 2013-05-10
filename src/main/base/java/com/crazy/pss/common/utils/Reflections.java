@@ -227,6 +227,24 @@ public class Reflections {
 			field.setAccessible(true);
 		}
 	}
+	
+	public static boolean hasAttribute(final String attrName, final Class clazz) {
+		Field f = null;
+		try {
+			f = clazz.getField(attrName);
+		} catch (SecurityException e) {
+			if(logger.isErrorEnabled()) {
+				logger.error("获取Class=" + clazz + "的" + attrName + "属性失败", e.getCause());
+			}
+			return false;
+		} catch (NoSuchFieldException e) {
+			if(logger.isErrorEnabled()) {
+				logger.error("不存在Class=" + clazz + "的" + attrName + "属性", e.getCause());
+			}
+			return false;
+		}
+		return f == null ? false : true;
+	}
 
 	/**
 	 * 通过反射, 获得Class定义中声明的泛型参数的类型, 注意泛型必须定义在父类处

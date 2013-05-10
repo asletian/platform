@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/views/common/taglib.jsp"%>
 <html>
 <head>
-	<title>菜单管理</title>
+	<title>数据字典管理</title>
 	<%@include file="/WEB-INF/views/common/include.jsp"%>
 	<script type="text/javascript">
 		$(document).ready(function() {
@@ -27,41 +27,28 @@
 </head>
 <body>
 	<ul class="nav nav-tabs">
-		<li><a href="${ctx}/sys/menu/list">菜单列表</a></li>
-		<li class="active"><a href="${ctx}/sys/menu/form?id=${menu.id}&parent.id=${menu.parent.id}">菜单${not empty menu.id?'修改':'添加'}</a></li>
+		<li><a href="${ctx}/sys/dictionary/list">字典列表</a></li>
+		<li class="active"><a href="${ctx}/sys/dictionary/form?id=${dictionary.id}">字典${not empty dictionary.id?'修改':'添加'}</a></li>
 	</ul><br/>
-	<form:form id="inputForm" modelAttribute="menu" action="${ctx}/sys/menu/save" method="post" class="form-horizontal">
+	<form:form id="inputForm" modelAttribute="dictionary" action="${ctx}/sys/dictionary/save" method="post" class="form-horizontal">
 		<form:hidden path="id"/>
-<%-- 		<tags:message content="${message}"/> --%>
+		<tags:message content="${message}"/>
 		<div class="control-group">
-			<label class="control-label">上级菜单:</label>
+			<label class="control-label">标签:</label>
 			<div class="controls">
-<%--                 <tags:treeselect id="menu" name="parent.id" value="${menu.parent.id}" labelName="parent.name" labelValue="${menu.parent.name}" --%>
-<%-- 					title="菜单" url="/sys/menu/treeData" extId="${menu.id}" parentIds="${menu.parentIds}"/> --%>
+				<form:input path="label" htmlEscape="false" maxlength="50" class="required"/>
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label">名称:</label>
+			<label class="control-label">值:</label>
 			<div class="controls">
-				<form:input path="name" htmlEscape="false" maxlength="50" class="required"/>
+				<form:input path="value" htmlEscape="false" maxlength="200"/>
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label">链接:</label>
+			<label class="control-label">类型:</label>
 			<div class="controls">
-				<form:input path="href" htmlEscape="false" maxlength="200"/>
-			</div>
-		</div>
-		<div class="control-group">
-			<label class="control-label">目标:</label>
-			<div class="controls">
-				<form:input path="target" htmlEscape="false" maxlength="10"/>
-			</div>
-		</div>
-		<div class="control-group">
-			<label class="control-label">图标:</label>
-			<div class="controls">
-				<form:input path="icon" htmlEscape="false" maxlength="50"/>
+				<form:input path="type" htmlEscape="false" maxlength="10"/>
 			</div>
 		</div>
 		<div class="control-group">
@@ -71,9 +58,9 @@
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label">可见:</label>
+			<label class="control-label">描述:</label>
 			<div class="controls">
-				<form:radiobuttons path="isShow" items="${fns:getDictList('show_hide')}" itemLabel="label" itemValue="value" htmlEscape="false" class="required"/>
+				<form:textarea path="desciption" htmlEscape="false" maxlength="500"/>
 			</div>
 		</div>
 		<div class="form-actions">

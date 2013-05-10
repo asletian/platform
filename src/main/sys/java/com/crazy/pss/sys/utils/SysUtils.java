@@ -36,7 +36,8 @@ public class SysUtils implements ApplicationContextAware{
 	}
 	
 	public static List<Dictionary> getDictList(String type){
-		return dictService.searchBy("type", type);
+		List<Dictionary> ls = dictService.searchBy("type", type);
+		return ls;
 	}
 	
 	@Override

@@ -20,7 +20,7 @@
 </head>
 <body>
 	<ul class="nav nav-tabs">
-		<li class="active"><a href="${ctx}/sys/menu/">菜单列表</a></li>
+		<li class="active"><a href="${ctx}/sys/menu/list">菜单列表</a></li>
 		<li><a href="${ctx}/sys/menu/form">菜单添加</a></li>
 	</ul>
 <%-- 	<tags:message content="${message}"/> --%>

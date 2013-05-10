@@ -1,8 +1,10 @@
 package com.crazy.pss.common.config;
 
 import java.io.IOException;
+import java.util.NoSuchElementException;
 import java.util.Properties;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Lazy;
@@ -72,8 +74,63 @@ public class GlobalConfiguration{
 		}
 	}
 	
-	public static String getConfig(String key){
+	public static String getString(String key) {
 		return cache.getProperty(key);
 	}
 	
+	public static String getString(String key, String defaultValue) {
+		String v = cache.getProperty(key);
+		if(StringUtils.isEmpty(v)) {
+			return defaultValue;
+		}
+		return v;
+	}
+	
+	public static Integer getInteger(String key) {
+		String v = cache.getProperty(key);
+		if(StringUtils.isEmpty(v)) {
+			throw new NoSuchElementException("不存在这样的配置key=" + key);
+		}
+		return Integer.parseInt(v);
+	}
+	
+	public static Integer getInteger(String key, Integer defaultValue) {
+		String v = cache.getProperty(key);
+		if(StringUtils.isEmpty(v)) {
+			return defaultValue;
+		}
+		return Integer.parseInt(v);
+	}
+	
+	public static Double getDouble(String key) {
+		String v = cache.getProperty(key);
+		if(StringUtils.isEmpty(v)) {
+			throw new NoSuchElementException("不存在这样的配置key=" + key);
+		}
+		return Double.parseDouble(v);
+	}
+	
+	public static Double getDouble(String key, Double defaultValue) {
+		String v = cache.getProperty(key);
+		if(StringUtils.isEmpty(v)) {
+			return defaultValue;
+		}
+		return Double.parseDouble(v);
+	}
+	
+	public Boolean getBoolean(String key) {
+		String value = cache.getProperty(key);
+		if (value == null) {
+			throw new NoSuchElementException("不存在这样的配置key=" + key);
+		}
+		return Boolean.valueOf(value);
+	}
+
+	public Boolean getBoolean(String key, boolean defaultValue) {
+		String value = cache.getProperty(key);
+		if (value == null) {
+			return defaultValue;
+		}
+		return Boolean.valueOf(value);
+	}
 }
