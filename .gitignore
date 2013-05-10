@@ -1,0 +1,16 @@
+.checkstyle
+.class
+.war
+.zip
+.rar
+.settings/*
+/indexes/*
+/target/*
+/src/main/webapp/WEB-INF/classes
+/src/main/webapp/userfiles/*
+.tomcatplugin
+/work
+/target
+/bin
+.#webclasspath
+/src/main/webapp/WEB-INF/lib
