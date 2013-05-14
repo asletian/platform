@@ -29,7 +29,7 @@
 		    	<ul class="nav nav-pills" style="margin:0;" id="menu">
 		    	  <li class="title"><h1>${fns:getConfig('productName')}<small></small></h1></li>
 				  <li style="width:18px;">&nbsp;</li>
-				  <c:set var="firstMenu" value="true"/><c:forEach items="${fns:getMenuList()}" var="menu" varStatus="idxStatus"><c:if test="${menu.parent.id eq 1}">
+				  <c:set var="firstMenu" value="true"/><c:forEach items="${fns:getMenuList()}" var="menu" varStatus="idxStatus"><c:if test="${not empty menu.parent and empty menu.parent.parent}">
 					<li class="menu ${firstMenu?' active':''}"><a class="menu" href="${ctx}/sys/menu/tree?parentId=${menu.id}" target="menuFrame" >${menu.name}</a></li>
 				  <c:if test="${firstMenu}"><c:set var="firstMenuId" value="${menu.id}"/></c:if><c:set var="firstMenu" value="false"/></c:if></c:forEach>
 				</ul>

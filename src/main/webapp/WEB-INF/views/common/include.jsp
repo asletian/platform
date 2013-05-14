@@ -1,7 +1,6 @@
 <meta http-equiv="Cache-Control" content="no-store" />
 <meta http-equiv="Pragma" content="no-cache" />
 <meta http-equiv="Expires" content="0" />
-<meta name="author" content="http://thinkgem.iteye.com"/>
 <meta http-equiv="X-UA-Compatible" content="IE=7,IE=9" />
 <script src="${ctxStatic}/jquery/jquery-base/jquery-1.9.1.min.js" type="text/javascript"></script>
 <script src="${ctxStatic}/jquery/jquery-base/jquery-migrate-1.1.1.min.js" type="text/javascript"></script>
@@ -14,6 +13,9 @@
 <%-- <script src="${ctxStatic}/jquery/jquery-jqGrid/js/jquery.jqGrid.src.js" type="text/javascript"></script> --%>
 <link href="${ctxStatic}/bootstrap/2.0.4/css/bootstrap.css" type="text/css" rel="stylesheet" />
 <script src="${ctxStatic}/bootstrap/2.0.4/js/bootstrap.js" type="text/javascript"></script>
+<link href="${ctxStatic}/jquery/jquery-zTree/css/zTreeStyle/zTreeStyle.css" type="text/css" rel="stylesheet" />
+<script src="${ctxStatic}/jquery/jquery-zTree/js/jquery.ztree.core-3.5.js" type="text/javascript"></script>
+<script src="${ctxStatic}/jquery/jquery-treeTable/jquery.treeTable.js" type="text/javascript"></script>
 <!--[if IE 6]><link href="${ctxStatic}/bootstrap/2.0.4/css/ie6.min.css" rel="stylesheet">
 <script src="${ctxStatic}/bootstrap/2.0.4/js/ie6.min.js" type="text/javascript"></script><![endif]-->
 <script src="${ctxStatic}/common.js" type="text/javascript"></script>

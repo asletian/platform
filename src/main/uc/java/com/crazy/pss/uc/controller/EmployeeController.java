@@ -21,9 +21,9 @@ public class EmployeeController extends BaseController{
 	
 	@ModelAttribute
 	public Employee get(@RequestParam(required=false) String id) {
-		if (!StringUtils.isEmpty(id)){
+		if (!StringUtils.isEmpty(id)) {
 			return employeeService.get(id);
-		}else{
+		} else {
 			return new Employee();
 		}
 	}

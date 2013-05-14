@@ -1,6 +1,7 @@
 package com.crazy.pss.sys.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -10,12 +11,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.crazy.pss.common.mapper.JsonMapper;
 import com.crazy.pss.common.utils.Constants;
 import com.crazy.pss.common.web.BaseController;
 import com.crazy.pss.sys.model.Menu;
 import com.crazy.pss.sys.service.MenuService;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 /**
  * 
@@ -83,4 +88,21 @@ public class MenuController extends BaseController{
 		return "modules/sys/menuList";
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = "treeData")
+	public String treeData(@RequestParam(required=false) String extId) {
+		List<Map<String, Object>> mapList = Lists.newArrayList();
+		List<Menu> list = menuService.searchAll();
+		for (int i=0; i<list.size(); i++){
+			Menu e = list.get(i);
+			if (StringUtils.isEmpty(extId) || (!StringUtils.isEmpty(extId) && !extId.equals(e.getId()) && e.getParentIds().indexOf(","+extId+",")==-1)){
+				Map<String, Object> map = Maps.newHashMap();
+				map.put("id", e.getId());
+				map.put("pId", e.getParent()!=null?e.getParent().getId():0);
+				map.put("name", e.getName());
+				mapList.add(map);
+			}
+		}
+		return JsonMapper.getInstance().toJson(mapList);
+	}
 }

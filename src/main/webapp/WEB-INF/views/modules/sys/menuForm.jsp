@@ -32,12 +32,12 @@
 	</ul><br/>
 	<form:form id="inputForm" modelAttribute="menu" action="${ctx}/sys/menu/save" method="post" class="form-horizontal">
 		<form:hidden path="id"/>
-<%-- 		<tags:message content="${message}"/> --%>
+		<tags:message content="${message}"/>
 		<div class="control-group">
 			<label class="control-label">上级菜单:</label>
 			<div class="controls">
-<%--                 <tags:treeselect id="menu" name="parent.id" value="${menu.parent.id}" labelName="parent.name" labelValue="${menu.parent.name}" --%>
-<%-- 					title="菜单" url="/sys/menu/treeData" extId="${menu.id}" parentIds="${menu.parentIds}"/> --%>
+                <tags:tree id="menu" name="parent.id" value="${menu.parent.id}" labelName="parent.name" labelValue="${menu.parent.name}"
+					title="菜单" url="/sys/menu/treeData" extId="${menu.id}" />
 			</div>
 		</div>
 		<div class="control-group">

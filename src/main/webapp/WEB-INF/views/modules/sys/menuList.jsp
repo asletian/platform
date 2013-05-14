@@ -23,11 +23,11 @@
 		<li class="active"><a href="${ctx}/sys/menu/list">菜单列表</a></li>
 		<li><a href="${ctx}/sys/menu/form">菜单添加</a></li>
 	</ul>
-<%-- 	<tags:message content="${message}"/> --%>
+	<tags:message content="${message}"/>
 	<table id="treeTable" class="table table-striped table-bordered table-condensed">
 		<tr><th>名称</th><th>链接</th><th>排序</th><th>可见</th><th>操作</th></tr>
 		<c:forEach items="${list}" var="menu">
-			<tr id="${menu.id}" pId="${menu.parent.id ne 1?menu.parent.id:'0'}">
+			<tr id="${menu.id}" pId="${not empty menu.parent and empty menu.parent.parent ? '0' : menu.parent.id}">
 				<td><a href="${ctx}/sys/menu/form?id=${menu.id}">${menu.name}</a></td>
 				<td>${menu.href}</td>
 				<td>${menu.sort}</td>

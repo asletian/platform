@@ -1,6 +1,6 @@
 <%@ tag language="java" pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/views/common/taglib.jsp"%>
 <%@ attribute name="page" type="org.springframework.data.domain.Page" required="true"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <script type="text/javascript">
 function searchForm(pageNo, pageSize) {

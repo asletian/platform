@@ -62,7 +62,6 @@ public class Menu {
 	@JoinColumn(name="PARENT_ID")
 	@NotFound(action = NotFoundAction.IGNORE)
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-	@NotNull
 	public Menu getParent() {
 		return parent;
 	}

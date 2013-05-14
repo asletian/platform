@@ -7,7 +7,6 @@
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}/z"/>
 <c:set var="ctxStatic" value="${pageContext.request.contextPath}/static"/>
-<%@ page import="com.crazy.pss.common.persistence.FilterRule.RuleOperator"%>
 <%  
     response.addHeader("Pragma","no-cache");  
     response.setHeader("Cache-Control","no-cache");  
