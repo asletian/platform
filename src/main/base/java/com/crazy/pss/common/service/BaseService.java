@@ -47,10 +47,12 @@ public abstract class BaseService<T> {
 		return getDao().findAll();
 	}
 	
+	@Transactional(readOnly = false)
 	public void delete(T t){
 		getDao().delete(t);
 	}
 	
+	@Transactional(readOnly = false)
 	public void delete(String id) {
 		getDao().delete(id);
 	}
@@ -80,6 +82,19 @@ public abstract class BaseService<T> {
 			
 		});
 		return ts;
+	}
+	
+	public List<T> searchBy(Collection<FilterRule> rules, Sort sort) {
+		if(sort == null) {
+			if(hasAttribute("createTime")) {
+				sort = new Sort("createTime");
+			}
+		}
+		return getDao().findAll(DynamicSpecifications.bySearchRule(rules, getEntityClass()), sort);
+	}
+	
+	public List<T> searchBy(Collection<FilterRule> rules) {
+		return getDao().findAll(DynamicSpecifications.bySearchRule(rules, getEntityClass()));
 	}
 	
 	public Page<T> searchPage(Collection<FilterRule> rules, Integer pageNo, Integer pageSize, Sort sort) {

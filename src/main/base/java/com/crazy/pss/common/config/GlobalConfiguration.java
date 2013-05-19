@@ -28,8 +28,6 @@ public class GlobalConfiguration{
 	
 	private static Logger log = LoggerFactory.getLogger(GlobalConfiguration.class);
 	
-	private static ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-	
 	private static Properties cache = new Properties();
 	
 	private GlobalConfiguration(){
@@ -46,6 +44,9 @@ public class GlobalConfiguration{
 			if(log.isInfoEnabled()){
 				log.info("开始加载路径为【" + locationPattern + "】的属性文件");
 			}
+			
+			ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+			
 			rs =  resolver.getResources(locationPattern);
 			if(log.isInfoEnabled()){
 				log.info("加载路径为【" + locationPattern + "】的属性文件成功");

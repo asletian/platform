@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.Version;
 
 import org.apache.commons.lang3.ObjectUtils;
@@ -17,6 +18,7 @@ import org.hibernate.annotations.GenericGenerator;
  * @author crazy/Y
  * @date 2013-4-30
  */
+@MappedSuperclass
 public abstract class AbstractModel implements Model<String>{
 	
 	private String id;

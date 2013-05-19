@@ -4,7 +4,10 @@
 	<classpathentry kind="src" path="src/main/base/java"/>
 	<classpathentry kind="src" path="src/main/uc/java"/>
 	<classpathentry kind="src" path="src/main/sys/java"/>
+	<classpathentry kind="src" path="src/main/security/java"/>
 	<classpathentry kind="con" path="org.maven.ide.eclipse.MAVEN2_CLASSPATH_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="D:/worksoft/apache-tomcat-6.0.16/lib/jsp-api.jar"/>
+	<classpathentry kind="lib" path="D:/worksoft/apache-tomcat-6.0.16/lib/servlet-api.jar"/>
 	<classpathentry kind="output" path="src/main/webapp/WEB-INF/classes"/>
 </classpath>

@@ -1,5 +1,8 @@
 package com.crazy.pss.sys.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -7,16 +10,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.NotFound;
-import org.hibernate.annotations.NotFoundAction;
 import org.hibernate.validator.constraints.Length;
 
+import com.crazy.pss.common.security.SysResource;
 import com.crazy.pss.common.utils.Constants;
 
 /**
@@ -28,10 +30,11 @@ import com.crazy.pss.common.utils.Constants;
  */
 @Entity
 @Table(name = "T_SYS_MENU")
-public class Menu {
+public class Menu implements SysResource{
 
 	private String id;
 	private Menu parent;	// 父级菜单
+	private List<Menu> children;
 	private String parentIds; // 所有父级编号
 	private String name; 	// 名称
 	private String href; 	// 链接
@@ -60,14 +63,21 @@ public class Menu {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="PARENT_ID")
-	@NotFound(action = NotFoundAction.IGNORE)
-	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	public Menu getParent() {
 		return parent;
 	}
 
 	public void setParent(Menu parent) {
 		this.parent = parent;
+	}
+
+	@OneToMany(mappedBy = "parent")
+	public List<Menu> getChildren() {
+		return children;
+	}
+
+	public void setChildren(List<Menu> children) {
+		this.children = children;
 	}
 
 	@Length(min=1, max=255)
@@ -147,6 +157,51 @@ public class Menu {
 
 	public void setDelFlag(String delFlag) {
 		this.delFlag = delFlag;
+	}
+
+	@Override
+	@Transient
+	public String getResourceId() {
+		return id;
+	}
+
+	@Override
+	@Transient
+	public String getResourceType() {
+		return "Menu";
+	}
+
+	@Override
+	@Transient
+	public int[] getOpersIndex() {
+		try {
+			throw new NoSuchMethodException("此方法不可用");
+		} catch (NoSuchMethodException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	@Transient
+	public int getOperIndexBySn(String operSn) {
+		try {
+			throw new NoSuchMethodException("此方法不可用");
+		} catch (NoSuchMethodException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+	@Override
+	@Transient
+	public List<SysResource> getChildrenResource() {
+		if(children != null){
+			List<SysResource> cs = new ArrayList<SysResource>();
+			cs.addAll(children);
+			return cs;
+		}
+		return null;
 	}
 	
 }
