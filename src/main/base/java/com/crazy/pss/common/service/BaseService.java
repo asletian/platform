@@ -39,12 +39,16 @@ public abstract class BaseService<T> {
 		getDao().save(t);
 	}
 	
-	public T get(String id){
+	public T get(String id) {
 		return getDao().findOne(id);
 	}
 	
-	public List<T> searchAll(){
+	public List<T> searchAll() {
 		return getDao().findAll();
+	}
+	
+	public List<T> searchAll(Sort sort) {
+		return getDao().findAll(sort);
 	}
 	
 	@Transactional(readOnly = false)
