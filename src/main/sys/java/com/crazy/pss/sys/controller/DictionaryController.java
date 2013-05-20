@@ -74,12 +74,4 @@ public class DictionaryController extends BaseController{
 		return "modules/sys/dictionaryList";
 	}
 	
-	@ModelAttribute("filterRules")
-	public FilterRules get(FilterRules filterRules) {
-		if (filterRules != null){
-			return filterRules;
-		}else{
-			return new FilterRules();
-		}
-	}
 }
