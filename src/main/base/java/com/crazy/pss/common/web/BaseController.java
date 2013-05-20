@@ -12,9 +12,11 @@ import javax.validation.Validator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.crazy.pss.common.beanvalidator.BeanValidators;
+import com.crazy.pss.common.persistence.FilterRules;
 
 /**
  * 
@@ -90,6 +92,21 @@ public abstract class BaseController {
 		}
 		redirectAttributes.addAttribute("message", sb.toString());
 		redirectAttributes.addFlashAttribute("message", sb.toString());
+	}
+	
+	/**
+	 * 分页条件查询的ModelAttribute
+	 * 
+	 * @param filterRules
+	 * @return
+	 */
+	@ModelAttribute("filterRules")
+	public FilterRules get(FilterRules filterRules) {
+		if (filterRules != null){
+			return filterRules;
+		}else{
+			return new FilterRules();
+		}
 	}
 	
 	/**
