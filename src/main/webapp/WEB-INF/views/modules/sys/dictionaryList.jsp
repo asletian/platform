@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="/WEB-INF/views/common/taglib.jsp"%>
+<%@ page import="com.crazy.pss.common.persistence.FilterRule.RuleOperator"%>
 <html>
 <head>
 	<title>字典管理</title>
@@ -14,9 +15,9 @@
 		<input id="pageNo" name="pageNo" type="hidden" value="${page.number}"/>
 		<input id="pageSize" name="pageSize" type="hidden" value="${page.size}"/>
 		<form:hidden path="rules[0].name" value="label" />
-		<form:hidden path="rules[0].operator" value="${EQ}" />
+		<form:hidden path="rules[0].operator" value="EQ" />
 		<form:hidden path="rules[1].name" value="type" />
-		<form:hidden path="rules[1].operator" value="${EQ}" />
+		<form:hidden path="rules[1].operator" value="EQ" />
 		&nbsp;&nbsp;<label>标签：</label><form:input path="rules[0].value" class="input-medium"/>
 		&nbsp;&nbsp;<label>类型 ：</label><form:input path="rules[1].value" class="input-medium"/>
 		&nbsp;<input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/>
