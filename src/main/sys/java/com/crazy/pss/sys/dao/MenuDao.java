@@ -25,7 +25,6 @@ public interface MenuDao extends ICustomRepository<Menu, Serializable>{
 	@Query("from Menu m where m.isShow = '" + Constants.SHOW + "' and m.target = ?1")
 	public List<Menu> findByTarget(String target);
 	
-	@Override
 	@Query("from Menu m where m.isShow = '" + Constants.SHOW + "'")
 	public List<Menu> findAll();
 	

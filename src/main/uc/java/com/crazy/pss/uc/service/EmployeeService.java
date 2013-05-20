@@ -1,6 +1,6 @@
 package com.crazy.pss.uc.service;
 
-import java.io.Serializable;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,9 +18,12 @@ public class EmployeeService extends BaseService<Employee> {
 	@Autowired
 	private EmployeeDao employeeDao;
 
-	@Override
-	protected ICustomRepository<Employee, Serializable> getDao() {
+	protected ICustomRepository getDao() {
 		return employeeDao;
+	}
+	
+	public List<Employee> findAllEmployee(){
+		return employeeDao.findAllEmployee();
 	}
 	
 }

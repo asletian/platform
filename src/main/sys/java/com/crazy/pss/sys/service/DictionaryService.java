@@ -42,7 +42,6 @@ public class DictionaryService extends BaseService<Dictionary> {
 
 	public List<Dictionary> search(final Dictionary dict, Integer pageNo, Integer size) {
 		Page<Dictionary> dicts = dictionaryDao.findAll(new Specification<Dictionary> (){
-			@Override
 			public Predicate toPredicate(Root<Dictionary> root,
 					CriteriaQuery<?> query, CriteriaBuilder cb) {
 				root = query.from(Dictionary.class);
