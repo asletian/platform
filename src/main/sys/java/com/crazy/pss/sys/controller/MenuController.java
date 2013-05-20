@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.apache.commons.lang.StringUtils;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -47,9 +48,7 @@ public class MenuController extends BaseController{
 	
 	@RequestMapping(value = "form")
 	public String form(Model model, Menu menu){
-		if (menu.getParent()==null||menu.getParent().getId()==null){
-			menu.setParent(new Menu());
-		} else {
+		if (menu.getParent() != null && !StringUtils.isEmpty(menu.getParent().getId())){
 			menu.setParent(menuService.get(menu.getParent().getId()));
 		}
 		model.addAttribute("menu", menu);
@@ -92,10 +91,10 @@ public class MenuController extends BaseController{
 	@RequestMapping(value = "treeData")
 	public String treeData(@RequestParam(required=false) String extId) {
 		List<Map<String, Object>> mapList = Lists.newArrayList();
-		List<Menu> list = menuService.searchAll();
+		List<Menu> list = menuService.searchAll(new Sort("sort desc"));
 		for (int i=0; i<list.size(); i++){
 			Menu e = list.get(i);
-			if (StringUtils.isEmpty(extId) || (!StringUtils.isEmpty(extId) && !extId.equals(e.getId()) && e.getParentIds().indexOf(","+extId+",")==-1)){
+			if (StringUtils.isEmpty(extId) || (!StringUtils.isEmpty(extId) && !extId.equals(e.getId()))){
 				Map<String, Object> map = Maps.newHashMap();
 				map.put("id", e.getId());
 				map.put("pId", e.getParent()!=null?e.getParent().getId():0);
