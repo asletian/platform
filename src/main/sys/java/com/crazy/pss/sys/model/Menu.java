@@ -35,7 +35,6 @@ public class Menu implements SysResource{
 	private String id;
 	private Menu parent;	// 父级菜单
 	private List<Menu> children;
-	private String parentIds; // 所有父级编号
 	private String name; 	// 名称
 	private String href; 	// 链接
 	private String target; 	// 目标（ mainFrame、_blank、_self、_parent、_top）
@@ -78,15 +77,6 @@ public class Menu implements SysResource{
 
 	public void setChildren(List<Menu> children) {
 		this.children = children;
-	}
-
-	@Length(min=1, max=255)
-	public String getParentIds() {
-		return parentIds;
-	}
-
-	public void setParentIds(String parentIds) {
-		this.parentIds = parentIds;
 	}
 	
 	@Column(name="NAME")
