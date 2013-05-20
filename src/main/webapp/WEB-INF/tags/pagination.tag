@@ -67,7 +67,7 @@ request.setAttribute("end", end);
 			  
 			  	 <% if (page.hasNextPage()){%>
 		               	<li><a href="javascript:searchForm(${current}, ${page.size})">下一页&gt;</a></li>
-		                <li><a href="javascript:searchForm(${page.totalPages}, ${page.size})">尾页&gt;&gt;</a></li>
+		                <li><a href="javascript:searchForm(${page.totalPages - 1}, ${page.size})">尾页&gt;&gt;</a></li>
 		         <%}else{%>
 		                <li class="disabled"><a href="#">下一页&gt;</a></li>
 		                <li class="disabled"><a href="#">尾页&gt;&gt;</a></li>
