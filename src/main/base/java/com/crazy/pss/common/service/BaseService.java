@@ -64,7 +64,6 @@ public abstract class BaseService<T> {
 	public T searchUnique(final String name, final String value) { 
 		T t = getDao().findOne(new Specification<T> (){
 			
-			@Override
 			public Predicate toPredicate(Root<T> root,
 					CriteriaQuery<?> query, CriteriaBuilder cb) {
 				Path<String> pname = root.get(name);
@@ -77,7 +76,6 @@ public abstract class BaseService<T> {
 	public List<T> searchBy(final String name, final String value) {
 		List<T> ts = getDao().findAll(new Specification<T> (){
 
-			@Override
 			public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query,
 					CriteriaBuilder cb) {
 				Path<String> pname = root.get(name);

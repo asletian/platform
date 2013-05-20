@@ -40,7 +40,6 @@ public class SysUtils implements ApplicationContextAware{
 		return ls;
 	}
 	
-	@Override
 	public void setApplicationContext(ApplicationContext applicationContext){
 		menuService = (MenuService) applicationContext.getBean("sys.menuService");
 		dictService = (DictionaryService) applicationContext.getBean("sys.dictionaryService");

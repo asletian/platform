@@ -24,7 +24,6 @@ import com.crazy.pss.common.utils.DateUtils;
 @Component
 public class CommonBindingInitializer implements WebBindingInitializer{
 
-	@Override
 	public void initBinder(WebDataBinder binder, WebRequest request) {
 		// String类型转换，将所有传递进来的String进行HTML编码，防止XSS攻击
 		binder.registerCustomEditor(String.class, new PropertyEditorSupport() {

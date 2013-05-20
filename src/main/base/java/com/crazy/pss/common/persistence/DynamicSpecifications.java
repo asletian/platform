@@ -18,7 +18,6 @@ public class DynamicSpecifications {
 	
 	public static <T> Specification<T> bySearchRule(final Collection<FilterRule> rules, final Class<T> clazz) {
 		return new Specification<T>() {
-			@Override
 			public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
 				if (rules != null && rules.size() > 0) {
 
@@ -126,7 +125,6 @@ public class DynamicSpecifications {
 				return cb.conjunction();
 			}
 
-			@Override
 			public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
 				return recursion(group, root, cb);
 			}

@@ -1,7 +1,9 @@
 package com.crazy.pss.uc.dao;
 
 import java.io.Serializable;
+import java.util.List;
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.crazy.pss.common.persistence.ICustomRepository;
@@ -16,6 +18,8 @@ import com.crazy.pss.uc.model.Employee;
  */
 public interface EmployeeDao extends ICustomRepository<Employee, Serializable>{
 
+	@Query("from Employee m ")
+	public List<Employee> findAllEmployee();
 	
 }
 

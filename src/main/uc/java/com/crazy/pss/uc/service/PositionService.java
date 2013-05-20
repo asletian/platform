@@ -1,7 +1,5 @@
 package com.crazy.pss.uc.service;
 
-import java.io.Serializable;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,7 +17,7 @@ public class PositionService extends BaseService<Position> {
 	private PositionDao PositionDao;
 
 	@Override
-	protected ICustomRepository<Position, Serializable> getDao() {
+	protected ICustomRepository getDao() {
 		return PositionDao;
 	}
 	

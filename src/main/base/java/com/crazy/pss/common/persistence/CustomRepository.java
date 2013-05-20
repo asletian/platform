@@ -34,17 +34,14 @@ public class CustomRepository<T, ID extends Serializable>
 		this.entityManager = entityManager;
 	}
 
-	@Override
 	public EntityManager getEntityManager() {
 		return entityManager;
 	}
 
-	@Override
 	public Session getSession() {
 		return (Session) entityManager.getDelegate();
 	}
 
-	@Override
 	public DetachedCriteria createDetachedCriteria(Criterion... criterions) {
 		DetachedCriteria dc = DetachedCriteria.forClass(Reflections.getClassGenricType(getClass()));
 		for (Criterion c : criterions) {
@@ -53,7 +50,6 @@ public class CustomRepository<T, ID extends Serializable>
 		return dc;
 	}
 	
-	@Override
 	public Query getQuery(String jpql){
 		return entityManager.createQuery(jpql);
 	}
