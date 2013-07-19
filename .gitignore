@@ -14,3 +14,5 @@
 /bin
 .#webclasspath
 /src/main/webapp/WEB-INF/lib
+.classpath
+.project
