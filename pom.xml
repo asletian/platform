@@ -9,7 +9,7 @@
 
 	<name>platform</name>
 	<url>http://maven.apache.org</url>
-
+<!-- http://www.oschina.net/code/snippet_98719_21419 -->
 	<properties>
 
 		<!-- 主要依赖库的版本定义 -->
@@ -31,7 +31,11 @@
 	</properties>
 
 	<dependencies>
-
+<dependency>
+	    <groupId>xpp3</groupId>
+	    <artifactId>xpp3</artifactId>
+	    <version>1.1.4c</version>
+	</dependency>
 		<dependency>
 			<groupId>org.apache.tiles</groupId>
 			<artifactId>tiles-extras</artifactId>
